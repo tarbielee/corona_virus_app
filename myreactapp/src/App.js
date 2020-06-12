@@ -1,8 +1,10 @@
-import React from "react";
+import React from "react"
 import Axios from "axios";
+import "./style.css";
+// import FetchRandomUser from "./components/FetchRandomUser";
 
 export default class App extends React.Component {
-     Global = {
+    state = {
         NewConfirmed: 0,
         TotalConfirmed: 0,
         NewDeaths: 0,
@@ -17,89 +19,67 @@ export default class App extends React.Component {
     }
 
     async getData() {
-        const resApi = await Axios.get("https://api.covid19api.com/");
+        const resApi = await Axios.get("https://api.covid19api.com/summary");
         const resCountries = await Axios.get("https://api.covid19api.com/countries");
-        let countries = Object.keys(resCountries.data.countries);
-        this.setGlobal({
+        // const countries = Object.keys(resCountries.data.countries);
+        this.setState({
             NewConfirmed: resApi.data.NewConfirmed,
             TotalConfirmed: resApi.data.TotalConfirmed,
             NewDeaths: resApi.data.NewDeaths,
-            TotalDeaths:resApi.data.TotalDeaths,
+            TotalDeaths: resApi.data.TotalDeaths,
             NewRecovered: resApi.data.NewRecovered,
             TotalRecovered: resApi.data.TotalRecovered,
-            countries
-        });
+            // countries
+        })
+    }
+
+    async getCountryData() {
+        const res = await Axios.get("");
     }
 
     renderCountryOptions() {
-        return this.Global.countries.map((country, i) => {
+        return this.state.countries.map((country, i) => {
             return <option key={i}>{country}</option>
-        });
-    } 
+        })
+    }
 
     render() {
-        return (
-        <div className="container">
-            <h1>Corona Virus Updates</h1>
+        return (<div className="container">
+            <h1>Corona update</h1>
 
             <select>
                 {this.renderCountryOptions()}
             </select>
 
             <div className="flex">
+
             <div className="box NewConfirmed">
                 <h3>NewConfirmed Cases</h3>
-                <h4>{this.Global.NewConfirmed}</h4>
+                <h4>{this.state.NewConfirmed}</h4>
             </div>
             <div className="box TotalConfirmed">
                 <h3>TotalConfirmed Cases</h3>
-                <h4>{this.Global.TotalConfirmed}</h4>
+                <h4>{this.state.TotalConfirmed}</h4>
             </div>
             <div className="box NewDeaths">
-                <h3>NewDeaths</h3>
-                <h4>{this.Global.NewDeaths}</h4>
+                <h3>NewDeaths Cases</h3>
+                <h4>{this.state.NewDeaths}</h4>
             </div>
             <div className="box TotalDeaths">
-                <h3>TotalDeaths</h3>
-                <h4>{this.Global.TotalDeaths}</h4>
+                <h3>TotalDeaths Cases</h3>
+                <h4>{this.state.TotalDeaths}</h4>
             </div>
             <div className="box NewRecovered">
-                <h3>NewRecovered</h3>
-                <h4>{this.Global.NewRecovered}</h4>
+                <h3>NewRecovered Cases</h3>
+                <h4>{this.state.NewRecovered}</h4>
             </div>
             <div className="box TotalRecovered">
-                <h3>TotalRecovered</h3>
-                <h4>{this.Global.TotalRecovered}</h4>
-            </div>
+                <h3>TotalRecovered Cases</h3>
+                <h4>{this.state.TotalRecovered}</h4>
             </div>
 
-        </div>);
+            </div>
+
+        </div>)
     }
 }
-
-
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
