@@ -26,26 +26,29 @@
   font-size: 1.5em;
 } 
 
-.box.NewConfirmed {
-  border: 1px solid #ce9c61;
-  background: #f0ad81;
-}.box.TotalConfirmed {
+/* .box.NewConfirmed {
+  border: 1px solid black;
+  background: gray;
+} */
+.box.TotalConfirmed {
   border: 1px solid #ce9c61;
   background: #f0ad81;
 }
 
-.box.NewDeaths {
+/* .box.NewDeaths {
   border: 1px solid #95c458;
   background: #c0f081;
-}.box.TotalDeaths {
+} */
+.box.TotalDeaths {
   border: 1px solid #95c458;
   background: #c0f081;
 }
 
-.box.NewRecovered {
+/* .box.NewRecovered {
   border: 1px solid #ce9c61;
   background: #f0ad81;
-}.box.TotalRecovered {
+} */
+.box.TotalRecovered {
   border: 1px solid #ce9c61;
   background: #f0ad81;
 }
