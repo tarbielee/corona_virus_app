@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: gray;
 }
 
 .container {
@@ -26,31 +27,31 @@
   font-size: 1.5em;
 } 
 
-/* .box.NewConfirmed {
-  border: 1px solid black;
-  background: gray;
-} */
 .box.TotalConfirmed {
-  border: 1px solid #ce9c61;
-  background: #f0ad81;
+  border: 1px solid black;
+  background: white;
+}
+.box.NewConfirmed {
+  border: 1px solid black;
+  background: white;
 }
 
-/* .box.NewDeaths {
-  border: 1px solid #95c458;
-  background: #c0f081;
-} */
 .box.TotalDeaths {
-  border: 1px solid #95c458;
-  background: #c0f081;
+  border: 1px solid black;
+  background: white;
+}
+.box.NewDeaths {
+  border: 1px solid black;
+  background: white;
 }
 
-/* .box.NewRecovered {
-  border: 1px solid #ce9c61;
-  background: #f0ad81;
-} */
 .box.TotalRecovered {
-  border: 1px solid #ce9c61;
-  background: #f0ad81;
+  border: 1px solid black;
+  background: white;
+}
+.box.NewRecovered {
+  border: 1px solid black;
+  background: white;
 }
 
 @media screen and (min-width: 800px) {

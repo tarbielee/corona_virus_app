@@ -1,90 +1,84 @@
-import React, {Component} from "react"
+import React from "react";
+import Axios from "axios";
 import "./style.css";
 
-
-
-export default class App extends Component {
-  
-  constructor(props) {
-    super(props);
-
-    this.getData = this.getData.bind(this);
-  }
-
+export default class App extends React.Component {
   state = {
-    listOfCountries: [],
-    results: 0
+      NewConfirmed: 100282,
+      TotalConfirmed: 1162857,
+      NewDeaths: 5658,
+      TotalDeaths: 63263,
+      NewRecovered: 15405,
+      TotalRecovered: 230845,
+      countries: []
   }
 
-  async componentDidMount() {
-    const url = "https://api.covid19api.com/summary";
-    const response = await fetch(url);
-    const data = await response.json();
-
-    const listOfCountries = data.Countries.map((value) => {
-      return value.Country
-    })
-
-    this.setState({
-      listOfCountries
-    })
+  componentDidMount() {
+      this.getData();
   }
 
+  async getData() {
+    const url = "https://api.covid19api.com/total/dayone/country/";
+        const response = await fetch(url);
+        const data = await response.json();
+      this.setState({
+          NewConfirmed: data.NewConfirmed,
+          TotalConfirmed: data.TotalConfirmed,
+          NewDeaths: data.NewDeaths,
+          TotalDeaths: data.TotalDeaths,
+          NewRecovered: data.NewRecovered,
+          TotalRecovered: data.TotalRecovered,
+          // countries
+      })
+  }
 
   async getCountryData() {
-    const url = `https://api.covid19api.com/total/dayone/country/`;
-    const response = await fetch(url);
-    const data = await response.json();
-
-    this.setState({
-      results: data[data.length - 1]
-    })
+      const res = await Axios.get("");
   }
-
-
 
   renderCountryOptions() {
-    return this.state.listOfCountries.map((country, i) => {
-      return <option key={i}>{country}</option>
-    })
+      return this.state.countries.map((country, i) => {
+          return <option key={i}>{country}</option>
+      })
   }
 
-
   render() {
-    return ( 
-      <div className="container">
-        <h1> Corona Virus Update</h1>
-         
-          <div className="menu">
-            <select onChange={this.getData}>
-              <option>Choose country</option>
+      return (<div className="container">
+          <h1>Corona update</h1>
+
+          <select>
               {this.renderCountryOptions()}
-            </select>
-          </div>
+          </select>
 
           <div className="flex">
 
-          <header className="header">
-            <h1>{this.state.results.Country}</h1>
-            <p>{this.state.results.Date}</p>
-          </header>
-            
-          <section className="box TotalConfirmed">
-            <h3>TotalConfirmed Cases</h3>
-            <ConfirmedDisplay value={this.state.results.Confirmed} />
-          </section>
-
-          <section className="box TotalRecovered">
-            <h3>TotalRecovered Cases</h3>
-            <RecoveredDisplay value={this.state.results.Recovered} />
-          </section>
-
-          <section className="box TotalDeaths">
-            <h3>TotalDeaths Cases</h3>
-            <DeathDisplay value={this.state.deaths} />
-          </section>
+          <div className="box NewConfirmed">
+              <h3>NewConfirmed Cases</h3>
+              <h4>{this.state.NewConfirmed}</h4>
           </div>
-      </div>
-    );
+          <div className="box TotalConfirmed">
+              <h3>TotalConfirmed Cases</h3>
+              <h4>{this.state.TotalConfirmed}</h4>
+          </div>
+          <div className="box NewDeaths">
+              <h3>NewDeaths Cases</h3>
+              <h4>{this.state.NewDeaths}</h4>
+          </div>
+          <div className="box TotalDeaths">
+              <h3>TotalDeaths Cases</h3>
+              <h4>{this.state.TotalDeaths}</h4>
+          </div>
+          <div className="box NewRecovered">
+              <h3>NewRecovered Cases</h3>
+              <h4>{this.state.NewRecovered}</h4>
+          </div>
+          <div className="box TotalRecovered">
+              <h3>TotalRecovered Cases</h3>
+              <h4>{this.state.TotalRecovered}</h4>
+          </div>
+
+          </div>
+
+      </div>)
   }
 }
