@@ -31,28 +31,28 @@
   border: 1px solid black;
   background: white;
 }
-.box.NewConfirmed {
+/* .box.NewConfirmed {
   border: 1px solid black;
   background: white;
-}
+} */
 
 .box.TotalDeaths {
   border: 1px solid black;
   background: white;
 }
-.box.NewDeaths {
+/* .box.NewDeaths {
   border: 1px solid black;
   background: white;
-}
+} */
 
 .box.TotalRecovered {
   border: 1px solid black;
   background: white;
 }
-.box.NewRecovered {
+/* .box.NewRecovered {
   border: 1px solid black;
   background: white;
-}
+} */
 
 @media screen and (min-width: 800px) {
   .flex {

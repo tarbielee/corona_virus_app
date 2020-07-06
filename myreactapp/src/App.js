@@ -4,17 +4,24 @@ import "./style.css";
 
 export default class App extends React.Component {
   state = {
-      NewConfirmed: 100282,
       TotalConfirmed: 1162857,
-      NewDeaths: 5658,
       TotalDeaths: 63263,
-      NewRecovered: 15405,
-      TotalRecovered: 230845,
+      TotalRecovered: 2308450,
       countries: []
   }
 
-  componentDidMount() {
-      this.getData();
+  async componentDidMount() {
+      const url = "https://api.covid19api.com/summary";
+      const response = await fetch(url);
+      const data  = await response.json;
+
+      const countries = data.countries.map((value) => {
+        return value.country
+      })
+
+      this.setState({
+        countries
+      })
   }
 
   async getData() {
@@ -22,18 +29,14 @@ export default class App extends React.Component {
         const response = await fetch(url);
         const data = await response.json();
       this.setState({
-          NewConfirmed: data.NewConfirmed,
           TotalConfirmed: data.TotalConfirmed,
-          NewDeaths: data.NewDeaths,
           TotalDeaths: data.TotalDeaths,
-          NewRecovered: data.NewRecovered,
           TotalRecovered: data.TotalRecovered,
-          // countries
       })
   }
 
   async getCountryData() {
-      const res = await Axios.get("");
+      const res = await Axios.get("https://api.covid19api.com/total/dayone/country/");
   }
 
   renderCountryOptions() {
@@ -47,30 +50,19 @@ export default class App extends React.Component {
           <h1>Corona update</h1>
 
           <select>
+              <option>select country</option>
               {this.renderCountryOptions()}
           </select>
 
           <div className="flex">
 
-          <div className="box NewConfirmed">
-              <h3>NewConfirmed Cases</h3>
-              <h4>{this.state.NewConfirmed}</h4>
-          </div>
           <div className="box TotalConfirmed">
               <h3>TotalConfirmed Cases</h3>
               <h4>{this.state.TotalConfirmed}</h4>
           </div>
-          <div className="box NewDeaths">
-              <h3>NewDeaths Cases</h3>
-              <h4>{this.state.NewDeaths}</h4>
-          </div>
           <div className="box TotalDeaths">
               <h3>TotalDeaths Cases</h3>
               <h4>{this.state.TotalDeaths}</h4>
-          </div>
-          <div className="box NewRecovered">
-              <h3>NewRecovered Cases</h3>
-              <h4>{this.state.NewRecovered}</h4>
           </div>
           <div className="box TotalRecovered">
               <h3>TotalRecovered Cases</h3>
