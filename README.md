@@ -30,4 +30,4 @@ npm run built
 *It correctly bundles React in production mode and optimizes the build for the best         performance.
  
  The build is minified and filenames include the hashes.
- The app is ready is ready to be deplyoed
+ The app is ready is ready to be deployed
