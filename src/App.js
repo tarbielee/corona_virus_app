@@ -1,8 +1,13 @@
 import React from "react";
-import Axios from "axios";
 import "./style.css";
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+    
+        this.getData = this.getData.bind(this);
+      }
+
   state = {
       TotalConfirmed: 1162857,
       TotalDeaths: 63263,
@@ -35,10 +40,7 @@ export default class App extends React.Component {
       })
   }
 
-  async getCountryData() {
-      const res = await Axios.get("https://api.covid19api.com/total/dayone/country/");
-  }
-
+  
   renderCountryOptions() {
       return this.state.countries.map((country, i) => {
           return <option key={i}>{country}</option>
