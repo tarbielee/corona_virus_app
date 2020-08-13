@@ -9,10 +9,11 @@ export default class App extends React.Component {
       }
 
   state = {
-      TotalConfirmed: 1162857,
-      TotalDeaths: 63263,
-      TotalRecovered: 2308450,
-      countries: []
+    confirmed: "loading",
+    recovered: "loading",
+    deaths: "loading",
+    countries: [],
+    results: []
   }
 
   async componentDidMount() {
@@ -29,14 +30,12 @@ export default class App extends React.Component {
       })
   }
 
-  async getData() {
-    const url = "https://api.covid19api.com/total/dayone/country/";
+  async getData(a) {
+    const url = "https://api.covid19api.com/total/dayone/country/${a.target.value}";
         const response = await fetch(url);
         const data = await response.json();
       this.setState({
-          TotalConfirmed: data.TotalConfirmed,
-          TotalDeaths: data.TotalDeaths,
-          TotalRecovered: data.TotalRecovered,
+        results: data[data.length - 1]
       })
   }
 
@@ -58,21 +57,30 @@ export default class App extends React.Component {
 
           <div className="flex">
 
-          <div className="box TotalConfirmed">
-              <h3>TotalConfirmed Cases</h3>
-              <h4>{this.state.TotalConfirmed}</h4>
-          </div>
-          <div className="box TotalDeaths">
-              <h3>TotalDeaths Cases</h3>
-              <h4>{this.state.TotalDeaths}</h4>
-          </div>
-          <div className="box TotalRecovered">
-              <h3>TotalRecovered Cases</h3>
-              <h4>{this.state.TotalRecovered}</h4>
-          </div>
+          <header className="header">
+            <h1>{this.state.results.Country}</h1>
+            <p>{this.state.results.Date}</p>
+          </header>
+            
+          <section className="box TotalConfirmed">
+            <h3>TotalConfirmed</h3>
+            <h4>1162857</h4>
+            <div className="TotalConfirmed">{this.state.results.TotalConfirmed}</div>
+          </section>
 
-          </div>
+          <section className="box TotalDeaths">
+            <h3>TotalDeaths</h3>
+            <h4>63263</h4>
+            <div className="TotalDeaths"> {this.state.results.TotalDeaths}</div>
+          </section>
 
-      </div>)
+          <section className="box TotalRecovered">
+            <h3>TotalRecovered</h3>
+            <h4>2308450</h4>
+            <div className="TotalRecovered"> {this.state.resultsTotalRecovered}</div>
+          </section>
+          </div>
+      </div>
+    );
   }
 }
